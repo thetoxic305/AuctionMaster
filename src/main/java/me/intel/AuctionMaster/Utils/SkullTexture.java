@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Base64;
 import java.util.UUID;
 
 import static me.intel.AuctionMaster.Utils.HeadDatabase.headApi;
@@ -87,6 +88,7 @@ public class SkullTexture {
                 try {
                     PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
                     PlayerTextures textures = profile.getTextures();
+                    texture = new String(Base64.getDecoder().decode(texture)).split("\"url\":\"")[1].split("\"")[0];
                     try {
                         textures.setSkin(new URL(texture));
                         ((SkullMeta)meta).setOwnerProfile(profile);
