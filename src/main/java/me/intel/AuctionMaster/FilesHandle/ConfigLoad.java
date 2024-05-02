@@ -743,5 +743,7 @@ public class ConfigLoad {
         browsingNextPage=AuctionMaster.menusCfg.getInt("browsing-menu.next-page-slot");
 
         maxAuctionPerPlayer = AuctionMaster.auctionsManagerCfg.getInt("max-auction-per-player");
+        if(maxAuctionPerPlayer == 0)
+            maxAuctionPerPlayer = 56;
     }
 }
