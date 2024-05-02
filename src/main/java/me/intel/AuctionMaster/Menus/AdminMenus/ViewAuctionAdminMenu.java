@@ -34,10 +34,10 @@ public class ViewAuctionAdminMenu {
             this.player = player;
             this.auction = auction;
             this.goBackTo = goBackTo;
-            inventory = Bukkit.createInventory(player, AuctionMaster.configLoad.viewAuctionMenuSize, utilsAPI.chat(player, AuctionMaster.configLoad.viewAuctionMenuName));
+            inventory = Bukkit.createInventory(player, 54, utilsAPI.chat(player, AuctionMaster.configLoad.viewAuctionMenuName));
 
             if (AuctionMaster.configLoad.useBackgoundGlass)
-                for (int i = 0; i < AuctionMaster.configLoad.viewAuctionMenuSize; i++)
+                for (int i = 0; i < 54; i++)
                     inventory.setItem(i, AuctionMaster.configLoad.backgroundGlass.clone());
 
             inventory.setItem(13, auction.getUpdatedDisplay());
