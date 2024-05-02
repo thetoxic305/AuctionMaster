@@ -1,14 +1,21 @@
 package me.intel.AuctionMaster.Utils;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import me.intel.AuctionMaster.AuctionMaster;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 
 import static me.intel.AuctionMaster.Utils.HeadDatabase.headApi;
@@ -78,10 +85,14 @@ public class SkullTexture {
 
                 final ItemMeta meta = skull.getItemMeta();
                 try {
-                    final Object profile = GAME_PROFILE_CONSTRUCTOR.newInstance(UUID.randomUUID(), UUID.randomUUID().toString().substring(17).replace("-", ""));
-                    final Object properties = GET_PROPERTIES.invoke(profile);
-                    INSERT_PROPERTY.invoke(properties, "textures", PROPERTY_CONSTRUCTOR.newInstance("textures", texture));
-                    setFieldValue(meta, "profile", profile);
+                    PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
+                    PlayerTextures textures = profile.getTextures();
+                    try {
+                        textures.setSkin(new URL(texture));
+                        ((SkullMeta)meta).setOwnerProfile(profile);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
                 } catch (Exception e) {
                     System.err.println("Failed to create fake GameProfile for custom player head:");
                     e.printStackTrace();
