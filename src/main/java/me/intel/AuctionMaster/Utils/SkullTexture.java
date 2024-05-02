@@ -23,25 +23,6 @@ import static me.intel.AuctionMaster.Utils.HeadDatabase.headApi;
 
 public class SkullTexture {
 
-    private static Method GET_PROPERTIES;
-    private static Method INSERT_PROPERTY;
-    private static Constructor<?> GAME_PROFILE_CONSTRUCTOR;
-    private static Constructor<?> PROPERTY_CONSTRUCTOR;
-
-    static {
-        try {
-            final Class<?> gameProfile = Class.forName("com.mojang.authlib.GameProfile");
-            final Class<?> property = Class.forName("com.mojang.authlib.properties.Property");
-            final Class<?> propertyMap = Class.forName("com.mojang.authlib.properties.PropertyMap");
-            GAME_PROFILE_CONSTRUCTOR = getConstructor(gameProfile, 2);
-            PROPERTY_CONSTRUCTOR = getConstructor(property, 2);
-            GET_PROPERTIES = getMethod(gameProfile, "getProperties");
-            INSERT_PROPERTY = getMethod(propertyMap, "put");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static Method getMethod(final Class<?> clazz, final String name) {
         for (final Method m : clazz.getMethods()) {
