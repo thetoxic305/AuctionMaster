@@ -51,6 +51,7 @@ public class SelectDurationSignGUI {
 
         p.getWorld().getBlockAt(x_start, y_start, z_start).setType(material);
         sign = (Sign) p.getWorld().getBlockAt(x_start,  y_start, z_start).getState();
+        sign.setEditable(true);
 
         ArrayList<String> lines = (ArrayList<String>) AuctionMaster.auctionsManagerCfg.getStringList("duration-sign-message");
         sign.setLine(1, utilsAPI.chat(p, lines.get(0).replace("%time-format%", minutes? AuctionMaster.configLoad.minutes : AuctionMaster.configLoad.hours)));

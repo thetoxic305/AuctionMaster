@@ -54,6 +54,7 @@ public class EditDurationSignGUI {
 
         p.getWorld().getBlockAt(x_start, y_start, z_start).setType(material);
         sign = (Sign) p.getWorld().getBlockAt(x_start, y_start, z_start).getState();
+        sign.setEditable(true);
 
         sign.setLine(1, utilsAPI.chat(p, "Enter minutes"));
         sign.setLine(2, utilsAPI.chat(p, "Examples: 20"));

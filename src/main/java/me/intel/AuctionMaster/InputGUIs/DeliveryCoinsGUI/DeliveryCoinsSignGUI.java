@@ -58,6 +58,7 @@ public class DeliveryCoinsSignGUI {
 
         p.getWorld().getBlockAt(x_start, y_start, z_start).setType(material);
         sign = (Sign) p.getWorld().getBlockAt(x_start, y_start, z_start).getState();
+        sign.setEditable(true);
         sign.setLine(1, Utils.chat("^^^^^^^^^^^^^^^"));
         sign.setLine(2, Utils.chat("Enter amount of"));
         sign.setLine(3, Utils.chat("coins to deliver"));
